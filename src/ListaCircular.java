@@ -1,4 +1,4 @@
-public class ListaCircular<T> {
+public class ListaCircular<T extends Comparable<T>> {
     Nodo <T>inicio;
     Nodo <T>fin;
     public ListaCircular(){
@@ -6,7 +6,7 @@ public class ListaCircular<T> {
 
     public void insertarInicio(T dato){
         Nodo n = new Nodo();
-        n.setInfo(dato);
+        n.setInfo((Comparable) dato);
         if(inicio==null){
             inicio=fin=n;
             n.setSig(inicio);

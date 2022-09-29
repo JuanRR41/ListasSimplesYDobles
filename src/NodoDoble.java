@@ -1,7 +1,6 @@
 public class NodoDoble <T>{
     private T info;
     private NodoDoble sig;
-
     private NodoDoble ant;
 
     public NodoDoble() {

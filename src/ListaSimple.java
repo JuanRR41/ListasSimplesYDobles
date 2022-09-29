@@ -216,6 +216,85 @@ public class ListaSimple <T> {
         }
         return dato;
     }
+    public void insrtarPorPosicion(int posicion, T valor){
+        // Verifica si la posición ingresada se encuentre en el rango
+        // >= 0 y <= que el numero de elementos del la lista.
+        if(posicion>=0 && posicion<=tamanio){
+            Nodo nuevo = new Nodo();
+            nuevo.setInfo(valor);
+            // Consulta si el nuevo nodo a ingresar va al inicio de la lista.
+            if(posicion == 0){
+                // Inserta el nuevo nodo al inicio de la lista.
+                nuevo.setSig(inicio);
+                inicio = nuevo;
+            }
+            else{
+                // Si el nodo a inserta va al final de la lista.
+                if(posicion == tamanio){
+                    Nodo aux = inicio;
+                    // Recorre la lista hasta llegar al ultimo nodo.
+                    while(aux.getSig() != null){
+                        aux = aux.getSig();
+                    }
+                    // Inserta el nuevo nodo despues de del ultimo.
+                    aux.setSig(nuevo);
+                }
+                else{
+                    // Si el nodo a insertar va en el medio de la lista.
+                    Nodo aux = inicio;
+                    // Recorre la lista hasta llegar al nodo anterior
+                    // a la posicion en la cual se insertara el nuevo nodo.
+                    for (int i = 0; i < (posicion-1); i++) {
+                        aux = aux.getSig();
+                    }
+                    // Guarda el nodo siguiente al nodo en la posición
+                    // en la cual va a insertar el nevo nodo.
+                    Nodo siguiente = aux.getSig();
+                    // Inserta el nuevo nodo en la posición indicada.
+                    aux.setSig(nuevo);
+                    // Une el nuevo nodo con el resto de la lista.
+                    nuevo.setSig(siguiente);
+                }
+            }
+            // Incrementa el contador de tamaño de la lista.
+            tamanio++;
+        }
+    }
+
+    public void ordenarLista(){
+        if (tamanio > 1) {
+            boolean cambio;
+            do {
+                Nodo actual = inicio;
+                Nodo anterior = null;
+                Nodo siguiente = inicio.getSig();
+                cambio = false;
+                while ( siguiente != null ) {
+                    if ((Integer)actual.getInfo() > (Integer) siguiente.getInfo()) {
+                        cambio = true;
+                        if ( anterior != null ) {
+                            Nodo sig = siguiente.getSig();
+                            anterior.setSig(siguiente);
+                            siguiente.setSig(actual);
+                            actual.setSig(sig);
+                        } else {
+                            Nodo sig = siguiente.getSig();
+                            inicio = siguiente;
+                            siguiente.setSig(actual);
+                            actual.setSig(sig);
+                        }
+                        anterior = siguiente;
+                        siguiente = actual.getSig();
+                    } else {
+                        anterior = actual;
+                        actual = siguiente;
+                        siguiente = siguiente.getSig();
+                    }
+                }
+            } while( cambio );
+        }
+    }
+
 
 
 }
