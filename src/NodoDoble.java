@@ -38,12 +38,4 @@ public class NodoDoble <T>{
         this.info = info;
     }
 
-    @Override
-    public String toString() {
-        return "NodoDoble{" +
-                "info=" + info +
-                ", sig=" + sig +
-                ", ant=" + ant +
-                '}';
-    }
 }

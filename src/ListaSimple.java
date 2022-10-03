@@ -47,23 +47,7 @@ public class ListaSimple <T> {
         }
             return dato;
     }
-    public void eliminaFin(T dato){
-        Nodo n = new Nodo(dato); Nodo r;
-        if (inicio==null){
-            n.setSig(inicio);
-            inicio=n;
-            this.tamanio--;
-        }
-        else{
-            r = inicio;
-            while (r.getSig()!=null){
-                r=r.getSig();
-            }
-            r.setSig(n);
-            n.setSig(null);
-            this.tamanio--;
-        }
-    }
+
     public T eliminarFin(){
         T dato=null;
         Nodo r = new Nodo<>();

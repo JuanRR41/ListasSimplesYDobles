@@ -81,6 +81,33 @@ public class ListasDobles <T>
         return dato;
     }
 
+    public T eliminarX(T elem){
+        T dato= null;
+        if (inicio == null)
+            System.out.println("lista vacía");
+        else
+        if (inicio.getInfo()== elem){
+            dato=(T)inicio.getInfo();
+            inicio = inicio.getSig();
+            tamanio--;
+        }
+        else {
+            NodoDoble actual = inicio;
+            while (actual.getSig()!=null && actual.getSig().getInfo() != elem) {
+                actual = actual.getSig();
+
+                dato=(T)actual.getSig().getInfo();
+            }
+            if (actual.getSig()== null )
+                System.out.println ("elemento "+elem+" no esta en la lista");
+            else{
+                actual.setSig(actual.getSig().getSig());
+                tamanio--;
+            }
+        }
+        return dato;
+    }
+
     public String recorrer(){
         String cadena = "";
         if(inicio==null){
@@ -164,10 +191,9 @@ public class ListasDobles <T>
                     dato=(T)aux.getSig().getInfo();
                 }
                 // Guarda el nodo siguiente al nodo a eliminar.
-                NodoDoble siguiente = aux.getSig();
                 // Elimina la referencia del nodo apuntando al nodo siguiente.
                 aux.setAnt(r);
-                aux.setSig(siguiente.getSig());
+                aux.setSig(aux.getSig().getSig());
             }
             // Disminuye el contador de tamaño de la lista.
             tamanio--;
@@ -190,6 +216,7 @@ public class ListasDobles <T>
                 // Si el nodo a inserta va al final de la lista.
                 if(posicion == tamanio){
                     NodoDoble aux = inicio;
+                    ;
                     // Recorre la lista hasta llegar al ultimo nodo.
                     while(aux.getSig() != null){
                         aux = aux.getSig();
